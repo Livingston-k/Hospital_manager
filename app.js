@@ -11,8 +11,13 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 // var http = require('http');
 var logger = require('morgan');
+var db = require('./models/db_controller')
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const dotenv = require("dotenv")
+dotenv.config()
+var signupRouter = require('./controllers/signup')
 
 var app = express();
 // view engine setup
@@ -29,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/signup', signupRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
